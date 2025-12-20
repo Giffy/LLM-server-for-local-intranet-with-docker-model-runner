@@ -1,0 +1,52 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        // check also package.json, angular.json and environments folder
+        {
+            "type": "npm",
+            "script": "ng serve --include=dev ",
+            "problemMatcher": [],
+            "label": "Serve Development portal at 4200",
+            "detail": "ng serve"
+        },
+        {
+            "type": "npm",
+            "script": "test --silent ",
+            "problemMatcher": [],
+            "label": "Unit Test check",
+            "detail": "ng test"
+        },
+        {
+            "type": "npm",
+            "script": "build:prod --base-href=/",
+            "group": "build",
+            "problemMatcher": [],
+            "label": "npm: build PROD",
+            "detail": "ng build PROD"
+        },
+        {
+            "type": "npm",
+            "script": "build:dev --base-href=/",
+            "group": "build",
+            "problemMatcher": [],
+            "label": "npm: build DEV",
+            "detail": "ng build DEV"
+        },
+        // {
+        //     "type": "npm",
+        //     "script": "build:pre --base-href=/",
+        //     "group": "build",
+        //     "problemMatcher": [],
+        //     "label": "npm: build PRE",
+        //     "detail": "ng build PRE"
+        // },
+        // {
+        //     "type": "npm",
+        //     "script": "build",
+        //     "group": "build",
+        //     "problemMatcher": [],
+        //     "label": "compilar DEV - npm: build",
+        //     "detail": "set NODE_OPTIONS=--openssl-legacy-provider && ng build"
+        // }
+    ]
+}

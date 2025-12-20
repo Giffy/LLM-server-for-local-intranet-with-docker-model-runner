@@ -1,0 +1,39 @@
+{
+    // General settings
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+
+    // Git settings
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.showActionButton": {
+        "commit": true,
+        "publish": false,
+        "sync": false
+    },
+
+    // Explorer settings
+    "explorer.excludeGitIgnore": false,
+    "explorer.confirmDelete": true,
+    "explorer.compactFolders": true,
+    
+    // Editor settings
+    "files.autoSave": "onFocusChange",
+
+
+    // Workbench settings
+    "workbench.sideBar.location": "left",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#15473a",
+        "titleBar.inactiveBackground": "default",
+        
+    }
+
+}

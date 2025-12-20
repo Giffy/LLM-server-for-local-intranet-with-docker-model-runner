@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "tamasfe.even-better-toml",
+        "aaron-bond.better-comments",
+        "Continue.continue",                    // LLM age
+        "PKief.material-icon-theme",
+        "mhutchie.git-graph",                   // Git graph   
+        "shd101wyy.markdown-preview-enhanced"   // Markdown preview   Ctrl + k + v  for preview
+    ]
+}
