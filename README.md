@@ -15,8 +15,10 @@ This are the steps I followed to deploy a server in local intranet to provide LL
 #### Steps
 
 **1. Install OS**
-Download Ubuntu server ISO from https://ubuntu.com/download/server
-Use <a href="https://etcher.balena.io/"> Balenaetcher </a>, Rufus or <a href="https://www.ventoy.net/en/download.html">Ventoy</a> to flash OS image to USB drive (4Gb)
+Download Ubuntu server ISO from https://ubuntu.com/download/server.
+
+Use <a href="https://etcher.balena.io/"> Balenaetcher </a>, <a href="https://rufus.ie/en/#download">Rufus</a> or <a href="https://www.ventoy.net/en/download.html">Ventoy</a> to flash OS image to USB drive (4Gb)
+
 Boot USB in PC and install minimal installation, configuring network.
 
 **2. Install software**
