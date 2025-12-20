@@ -73,6 +73,11 @@ docker model rm smollm2:135-Q4_0
 
 Explore more AI models in <a href="https://hub.docker.com/u/ai">Docker Hub</a>
 
+Pull GGUF models from HuggingFace
+```Bash
+docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
+```
+
 **3. Install reverse-proxy for remote access**
 
 1. Install nginx
@@ -135,6 +140,23 @@ prompts:
     prompt: I am a senior software developer.
 
 ```
+
+### Conclussions
+
+A miniPc is used for this lab:
+
+CPU: i3-5005 at 2.00Ghz  (2 cores / 4 threads)
+Memory: 8Gb
+Disk: NMVE 64Gb
+
+
+| Name | llm model| size | context window | role | performance in above spec|
+|:---:|-----|-----|-----|-----|-----|
+| Granite 4 nano |ai/granite-4.0-nano:350M-BF16|672.22 MiB| 33K tokens| chat|d| 
+| Gemma3 |ai/gemma3:270M-F16| 511.46 MiB| 33K tokens| chat|d| 
+| Qwen 2.5 |ai/qwen2.5:0.5B-F16| 942.43 MiB| 33K tokens| autocomplete|d| 
+
+
 
 
 
