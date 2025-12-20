@@ -92,7 +92,8 @@ Server will be accessible using port 12435
 Go to extension market and look for Continue.continue ans install.
 
 Configure after installing, use ctrl + l to open it and click on config (gear icon on top right corner).
-On side menu click confings and config yaml will appear.
+
+On side menu click Configs and click in 'Local config' the yaml file will open.
 
 ```Yaml
 
