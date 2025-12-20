@@ -98,9 +98,11 @@ name: Local Config
 version: 1.0.0
 schema: v1
 models:
-  - name: dockerserver-smollm2
+  # Configuration for low spec server with 8Gb and without GPU
+  
+  - name: dockerserver-granite4
     provider: llamastack
-    model: smollm2:135M-Q4_0
+    model: ai/granite-4.0-nano:350M-BF16
     apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
     roles:
       - chat
@@ -114,9 +116,20 @@ models:
     apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
     roles:
       - autocomplete
+    defaultCompletitionOptions:
+      temperature: 0.1
+      maxTokens: 300      
     requestOptions:
       extraBodyProperties:
         think: false # turning off the thinking
+
+rules:
+  - Give concise responses
+  - Always describe the decissions taken
+
+prompts:
+  - name: Software developer
+    prompt: I am a senior software developer.
 
 ```
 
