@@ -7,7 +7,7 @@ models:
   - name: dockerserver-granite4
     provider: llamastack
     model: ai/granite-4.0-nano:350M-BF16
-    apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
+    apiBase: http://192.168.10.36:12435/engines/v1/
     roles:
       - chat
     defaultCompletitionOptions:
@@ -17,7 +17,7 @@ models:
   - name: dockerserver-gemma3
     provider: llamastack
     model: ai/gemma3:270M-F16
-    apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
+    apiBase: http://192.168.10.36:12435/engines/v1/
     roles:
       - chat
     defaultCompletitionOptions:
@@ -28,7 +28,7 @@ models:
   - name: dockerserver-qwen-without thinking
     provider: llamastack
     model: qwen2.5:0.5B-F16
-    apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
+    apiBase: http://192.168.10.36:12435/engines/v1/
     roles:
       - autocomplete
     defaultCompletitionOptions:

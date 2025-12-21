@@ -1,4 +1,4 @@
-### Project Description
+## Project Description
 
 #### Overview
 This are the steps I followed to deploy a server in local intranet to provide LLM models locally.
@@ -8,11 +8,12 @@ This are the steps I followed to deploy a server in local intranet to provide LL
 - Instrucctions to configure, download models and run them locally.
 - Configuration <a href="https://www.continue.dev/">Continue</a> 1.2.11 a Visual Studio Code extension to use LLM models.
 
-#### Prerequisites
+**Prerequisites**
 - Minimal hardware configuration: CPU x64 with 8Gb 
 - Recomended hardware configuration: GPU
 
-#### Steps
+
+## Let's start
 
 **1. Install OS**
 Download Ubuntu server ISO from https://ubuntu.com/download/server.
@@ -73,10 +74,6 @@ docker model rm smollm2:135-Q4_0
 
 Explore more AI models in <a href="https://hub.docker.com/u/ai">Docker Hub</a>
 
-Pull GGUF models from HuggingFace
-```Bash
-docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
-```
 
 **3. Install reverse-proxy for remote access**
 
@@ -111,7 +108,7 @@ models:
   - name: dockerserver-granite4
     provider: llamastack
     model: ai/granite-4.0-nano:350M-BF16
-    apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
+    apiBase: http://192.168.10.36:12435/engines/v1/
     roles:
       - chat
     defaultCompletitionOptions:
@@ -121,7 +118,7 @@ models:
   - name: dockerserver-qwen-without thinking
     provider: llamastack
     model: qwen2.5:0.5B-F16
-    apiBase: http://192.168.10.36:12435/engines/llama.cpp/v1/
+    apiBase: http://192.168.10.36:12435/engines/v1/
     roles:
       - autocomplete
     defaultCompletitionOptions:
@@ -141,7 +138,33 @@ prompts:
 
 ```
 
-### Conclussions
+
+## Downloading additional models
+
+
+Pull GGUF models from HuggingFace
+```Bash
+docker model pull hf.co/mradermacher/rStar-Coder-Qwen3-0.6B-GGUF-Q4_K_M
+```
+
+Rename a model (Tag a model)
+```Bash
+docker model tag hf.co/mradermacher/rStar-Coder-Qwen3-0.6B-GGUF qwen3-coder
+```
+
+Another way to add models, let's try to pull https://huggingface.co/mradermacher/rStar-Coder-Qwen3-0.6B-GGUF but Type Q6_K
+
+```Bash
+# Download a model file in GGUF format, for example from HuggingFace
+$curl -L -o model.gguf https://huggingface.co/mradermacher/rStar-Coder-Qwen3-0.6B-GGUF/resolve/main/rStar-Coder-Qwen3-0.6B.Q6_K.gguf
+
+
+# Package it as OCI Artifact and load as local model
+$ docker model package --gguf "$(pwd)/model.gguf" ai/qwen-coder-0.6b:Q6_K
+```
+
+
+### Benchmarks
 
 A miniPc is used for this lab:
 
@@ -149,15 +172,30 @@ CPU: i3-5005 at 2.00Ghz  (2 cores / 4 threads)
 Memory: 8Gb
 Disk: NMVE 64Gb
 
+Commands used to benchmark models:
+```
+docker model bench granite-4.0-nano:350M-BF16 --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
+docker model bench gemma3:270M-F16 --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
+docker model bench qwen2.5:0.5B-F16 --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
+docker model bench qwen-coder-0.6b:Q6_K --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
+docker model bench qwen-coder-0.4b:Q4_K_M --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
+docker model bench qwen-coder-0.4b:Q4_K_S --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
+```
 
-| Name | llm model| size | context window | role | performance in above spec|
-|:---:|-----|-----|-----|-----|-----|
-| Granite 4 nano |ai/granite-4.0-nano:350M-BF16|672.22 MiB| 33K tokens| chat|d| 
-| Gemma3 |ai/gemma3:270M-F16| 511.46 MiB| 33K tokens| chat|d| 
-| Qwen 2.5 |ai/qwen2.5:0.5B-F16| 942.43 MiB| 33K tokens| autocomplete|d| 
+| Name          | LLM model                   | Size      | Context window | Round1 Max TPS *| Round2 Max TPS *|
+|:-------------:|-----------------------------|-----------|----------------|:---------------:|:---------------:|
+|Granite 4 nano |ai/granite-4.0-nano:350M-BF16|672.22 MiB |33K tokens      | n/a             | n/a             | 
+|Gemma3         |ai/gemma3:270M-F16           |511.46 MiB |33K tokens      | 7.94            | 11.98           | 
+|Qwen 2.5       |ai/qwen2.5:0.5B-F16          |942.43 MiB |33K tokens      | n/a             | n/a             |
+|Qwen3-coder    |qwen-coder-0.6b:Q6_K         |466.50 MiB |                | n/a             | n/a             |
+|Qwen3-coder    |qwen-coder-0.4b:Q4_K_M       |372.65 MiB |                | n/a             | n/a             |
+|Qwen3-coder    |qwen-coder-0.4b:Q4_K_S       |359.84 MiB |                | n/a             | n/a             |
 
 
+\* Using hardware described, concurrency 1
 
 
+### References
 
+https://docs.docker.com/ai/model-runner/get-started/
 
