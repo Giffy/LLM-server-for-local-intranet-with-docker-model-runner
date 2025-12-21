@@ -168,9 +168,9 @@ $ docker model package --gguf "$(pwd)/model.gguf" ai/qwen-coder-0.6b:Q6_K
 
 A miniPc is used for this lab:
 
-CPU: i3-5005 at 2.00Ghz  (2 cores / 4 threads)
-Memory: 8Gb
-Disk: NMVE 64Gb
+**CPU:** i3-5005 at 2.00Ghz  (2 cores / 4 threads)
+**Memory:** 8Gb
+**Disk:** NMVE 64Gb
 
 Commands used to benchmark models:
 ```
@@ -182,11 +182,11 @@ docker model bench qwen-coder-0.4b:Q4_K_M --concurrency 1 --duration 180s  --pro
 docker model bench qwen-coder-0.4b:Q4_K_S --concurrency 1 --duration 180s  --prompt "what's your opinion on coffee vs tea?"
 ```
 
-| Name          | LLM model                   | Size      | Context window | Round1 Max TPS *| Round2 Max TPS *|
+| Name          | LLM model                   | Size      | Context window | Round1 Max TPS / tokens/ time*| Round2 Max TPS / tokens/ time*|
 |:-------------:|-----------------------------|-----------|----------------|:---------------:|:---------------:|
-|Granite 4 nano |ai/granite-4.0-nano:350M-BF16|672.22 MiB |33K tokens      | n/a             | n/a             | 
-|Gemma3         |ai/gemma3:270M-F16           |511.46 MiB |33K tokens      | 7.94            | 11.98           | 
-|Qwen 2.5       |ai/qwen2.5:0.5B-F16          |942.43 MiB |33K tokens      | n/a             | n/a             |
+|Granite 4 nano |ai/granite-4.0-nano:350M-BF16|672.22 MiB |33K tokens      | 5.75/1263/3m39s| 5.75/1263/3m39s   | 
+|Gemma3         |ai/gemma3:270M-F16           |511.46 MiB |33K tokens      | 7.94/1687/3m41s| 11.98/2652/4m06s   | 
+|Qwen 2.5       |ai/qwen2.5:0.5B-F16          |942.43 MiB |33K tokens      | 4.60/1475/3m00s| 3.25/1110/5m41s   |
 |Qwen3-coder    |qwen-coder-0.6b:Q6_K         |466.50 MiB |                | n/a             | n/a             |
 |Qwen3-coder    |qwen-coder-0.4b:Q4_K_M       |372.65 MiB |                | n/a             | n/a             |
 |Qwen3-coder    |qwen-coder-0.4b:Q4_K_S       |359.84 MiB |                | n/a             | n/a             |
